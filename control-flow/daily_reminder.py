@@ -1,34 +1,23 @@
-# control-flow/daily_reminder.py
+# daily_reminder.py
 
 def main():
-    while True:
-        task = input("Enter your task: ").strip()
-        priority = input("Priority (high/medium/low): ").strip().lower()
-        time_bound = input("Is it time-bound? (yes/no): ").strip().lower()
+    task = input("Enter your task: ")
+    priority = input("Priority (high/medium/low): ").lower()
+    time_bound = input("Is it time-bound? (yes/no): ").lower()
 
-        reminder = ""
+    if priority == "high":
+        reminder = f"Reminder: '{task}' is a high priority task"
+    elif priority == "medium":
+        reminder = f"Reminder: '{task}' is a medium priority task"
+    elif priority == "low":
+        reminder = f"Note: '{task}' is a low priority task. Consider completing it when you have free time."
+    else:
+        reminder = f"Invalid priority for task: '{task}'"
 
-        # Replacing match-case with if-elif for compatibility
-        if priority == "high":
-            reminder = f"'{task}' is a high priority task"
-        elif priority == "medium":
-            reminder = f"'{task}' is a medium priority task"
-        elif priority == "low":
-            reminder = f"'{task}' is a low priority task"
-        else:
-            print("Invalid priority. Please enter high, medium, or low.")
-            continue
+    if time_bound == "yes" and priority in ["high", "medium"]:
+        reminder += " that requires immediate attention today!"
 
-        if time_bound == "yes":
-            reminder += " that requires immediate attention today!"
-        elif time_bound == "no":
-            reminder = f"Note: {reminder}. Consider completing it when you have free time."
-        else:
-            print("Invalid input for time-bound. Please enter yes or no.")
-            continue
-
-        print(f"\nReminder: {reminder}")
-        break
+    print(reminder)
 
 
 if __name__ == "__main__":
